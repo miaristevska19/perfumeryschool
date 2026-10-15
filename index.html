@@ -3,42 +3,392 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Your Name · A nose in the making</title>
+  <meta name="theme-color" content="#2a7048">
+  <title>Mia Ristevska · A nose in the making</title>
   <meta name="description" content="Portfolio of an aspiring perfumer: a story told in scent, across four languages and five countries.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+/* =====================================================================
+   BRAND COLOURS (taken from the inspiration photo)
+   Change a colour here and it changes everywhere on the page.
+   ===================================================================== */
+:root {
+  --ink: #12200f;            /* near-black green, used for text on light backgrounds */
+
+  --green: #2a7048;          /* main rich green */
+  --green-deep: #174a30;     /* darkest green */
+  --green-bright: #4f9d69;   /* fresh highlight green */
+  --green-glow: #46a06a;     /* the light in the top section */
+
+  --beige: #efe4d0;
+  --cream: #f8f1e4;
+  --sand: #dccdb0;
+
+  --teal: #93b6b7;           /* dusty teal sky */
+  --teal-deep: #5c9297;
+  --rose: #d9a39b;           /* dusty rose pink */
+  --blush: #f3d6cf;
+  --terra: #c0705f;          /* rust-rose of the horizon */
+  --terra-deep: #a4513f;
+  --gold: #e2bd62;           /* the golden yellow of the numbers / flowers */
+  --gold-soft: #f4dc9c;
+
+  --serif: "Cormorant Garamond", Georgia, serif;
+  --sans: "Jost", system-ui, sans-serif;
+  --ease: cubic-bezier(.2, .7, .2, 1);
+}
+
+/* ============ BASE ============ */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--sans);
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--ink);
+  background: var(--beige);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+/* fine film grain over the whole page, like the inspiration photo */
+body::after {
+  content: ""; position: fixed; inset: 0; z-index: 90; pointer-events: none; opacity: .09;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+ul { list-style: none; margin: 0; padding: 0; }
+h1, h2, h3 { font-family: var(--serif); font-weight: 500; line-height: 1.1; margin: 0; }
+
+.wrap { position: relative; z-index: 2; width: min(1100px, 100% - 3rem); margin-inline: auto; }
+.wrap--narrow { width: min(720px, 100% - 3rem); }
+.center { text-align: center; }
+
+/* ============ NAV ============ */
+.nav {
+  position: fixed; inset: 0 0 auto 0; z-index: 80;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.1rem clamp(1.2rem, 4vw, 3rem);
+  transition: background .4s var(--ease), padding .4s var(--ease);
+  color: var(--cream);
+}
+.nav.is-solid { background: rgba(23, 74, 48, .94); backdrop-filter: blur(8px); padding-block: .7rem; }
+.nav__logo { font-family: var(--serif); font-size: 1.5rem; text-decoration: none; letter-spacing: .12em; }
+.nav__links { display: flex; gap: 1.8rem; }
+.nav__links a { text-decoration: none; font-size: .78rem; letter-spacing: .18em; text-transform: uppercase; opacity: .85; transition: opacity .2s; }
+.nav__links a:hover { opacity: 1; }
+@media (max-width: 760px) { .nav__links { display: none; } }
+
+/* ============ HERO ============ */
+.hero {
+  position: relative; min-height: 100vh; display: grid; place-items: center;
+  background:
+    radial-gradient(ellipse 55% 45% at 6% 104%, rgba(217, 163, 155, .6), transparent 70%),
+    radial-gradient(ellipse 50% 50% at 100% 0%, rgba(147, 182, 183, .55), transparent 70%),
+    radial-gradient(ellipse at 72% 28%, var(--green-glow) 0%, var(--green) 48%, var(--green-deep) 100%);
+  color: var(--cream); overflow: hidden; padding: 7rem 1.5rem 4rem;
+}
+.hero__grid {
+  position: relative; z-index: 2; width: min(1100px, 100%);
+  display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(2rem, 6vw, 5rem); align-items: center;
+}
+.hero__eyebrow { font-size: .8rem; letter-spacing: .35em; text-transform: uppercase; color: var(--gold-soft); margin: 0 0 1.8rem; }
+.hero__title { font-size: clamp(2.3rem, 6vw, 4.8rem); letter-spacing: -.01em; margin-bottom: 1.8rem; }
+.hero__title em { color: var(--gold-soft); font-style: italic; }
+.hero__sub { font-size: 1.08rem; max-width: 540px; opacity: .94; margin: 0 0 2.4rem; }
+.hero__cta {
+  display: inline-block; text-decoration: none; font-size: .8rem; letter-spacing: .25em; text-transform: uppercase;
+  padding-bottom: .4rem; border-bottom: 1px solid var(--gold-soft); color: var(--gold-soft);
+  transition: letter-spacing .3s var(--ease);
+}
+.hero__cta:hover { letter-spacing: .35em; }
+.hero__glow {
+  position: absolute; width: 60vmax; height: 60vmax; right: -20vmax; top: -15vmax; border-radius: 50%;
+  background: radial-gradient(circle, rgba(244, 220, 156, .22), transparent 65%);
+  animation: drift 14s ease-in-out infinite alternate; pointer-events: none;
+}
+@keyframes drift { to { transform: translate(-6vmax, 8vmax) scale(1.1); } }
+
+/* arch-shaped photo frame (used for your portrait and the perfume photo) */
+.arch { position: relative; margin: 0; width: min(var(--w, 360px), 78vw); aspect-ratio: 3 / 4; isolation: isolate; }
+.arch::before {
+  content: ""; position: absolute; inset: 18px -18px -18px 18px; z-index: -1;
+  border: 1px solid var(--gold-soft); border-radius: 999px 999px 14px 14px; opacity: .85;
+}
+.arch__frame {
+  position: absolute; inset: 0; overflow: hidden; border-radius: 999px 999px 14px 14px;
+  background: linear-gradient(170deg, var(--teal) 0%, var(--rose) 55%, var(--gold) 120%);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, .28);
+}
+.arch__frame img { width: 100%; height: 100%; object-fit: cover; }
+.arch__cap { position: absolute; left: 0; right: 0; bottom: -2.6rem; text-align: center; font-family: var(--serif); font-style: italic; font-size: 1.15rem; color: var(--gold-soft); }
+.arch.no-photo .arch__frame::after {
+  content: attr(data-hint); white-space: pre-line; position: absolute; inset: 0;
+  display: grid; place-items: center; text-align: center; padding: 1rem;
+  font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; color: var(--ink); opacity: .55;
+}
+.portrait { justify-self: center; }
+@media (max-width: 860px) {
+  .hero { padding-top: 6.5rem; }
+  .hero__grid { grid-template-columns: 1fr; }
+  .portrait { order: -1; --w: 240px; margin-bottom: 2rem; }
+}
+
+/* ============ CHAPTERS ============ */
+.chapter { position: relative; overflow: hidden; padding: clamp(5rem, 12vw, 9rem) 0; }
+.chapter--beige {
+  background:
+    radial-gradient(ellipse 45% 40% at 100% 0%, rgba(217, 163, 155, .32), transparent 70%),
+    radial-gradient(ellipse 45% 40% at 0% 100%, rgba(147, 182, 183, .32), transparent 70%),
+    var(--beige);
+}
+.chapter--dusk {   /* the map section: teal sky above, deep green below, a rose glow */
+  color: var(--cream);
+  background:
+    radial-gradient(ellipse 60% 40% at 12% 100%, rgba(217, 163, 155, .38), transparent 70%),
+    linear-gradient(180deg, #2c6b6b 0%, #256a4e 50%, #1d5a41 100%);
+}
+.chapter--green {
+  color: var(--cream);
+  background:
+    radial-gradient(ellipse 50% 40% at 100% 0%, rgba(147, 182, 183, .38), transparent 70%),
+    radial-gradient(ellipse 45% 40% at 0% 100%, rgba(226, 189, 98, .22), transparent 70%),
+    linear-gradient(180deg, var(--green) 0%, #2b7a5a 100%);
+}
+.chapter--sunset {  /* epilogue: green and teal that melt into a rose-gold glow */
+  color: var(--cream); padding-bottom: clamp(7rem, 14vw, 11rem);
+  background:
+    radial-gradient(ellipse 90% 50% at 50% 118%, rgba(244, 220, 156, .95), rgba(217, 163, 155, .75) 38%, transparent 72%),
+    linear-gradient(180deg, #1f5f50 0%, #2f7a6b 55%, #4f8f8a 100%);
+}
+
+.chapter__num { font-size: .78rem; letter-spacing: .35em; text-transform: uppercase; color: var(--green); margin: 0 0 1rem; }
+.chapter--dusk .chapter__num, .chapter--green .chapter__num, .chapter--sunset .chapter__num { color: var(--gold-soft); }
+.chapter__title { font-size: clamp(2rem, 5vw, 3.6rem); margin-bottom: 1.5rem; }
+.chapter__intro { font-size: 1.15rem; max-width: 620px; opacity: .92; margin: 0 0 3rem; }
+.center .chapter__intro { margin-inline: auto; }
+.chapter__statement {
+  font-family: var(--serif); font-style: italic; font-size: clamp(1.4rem, 3vw, 2.1rem); line-height: 1.35;
+  max-width: 760px; margin: 0 0 3.5rem; color: var(--blush);
+}
+
+.prose p { font-size: 1.12rem; margin: 0 0 1.3rem; }
+.prose .lead { font-family: var(--serif); font-size: 2rem; color: var(--green); }
+
+/* ============ WORLD (map) ============ */
+.world { display: grid; gap: clamp(2rem, 5vw, 4rem); grid-template-columns: 1.05fr 1fr; align-items: center; }
+@media (max-width: 860px) { .world { grid-template-columns: 1fr; } }
+.world__col { display: grid; gap: 2.5rem; }
+.world h3 { font-size: 1.6rem; color: var(--gold-soft); margin-bottom: 1rem; font-style: italic; }
+.places li, .langs li {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
+  padding: .7rem 0; border-bottom: 1px solid rgba(248, 241, 228, .22);
+}
+.places__name, .langs span { font-family: var(--serif); font-size: 1.45rem; }
+.places__name small { display: block; font-family: var(--sans); font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; opacity: .7; margin-top: -.2rem; }
+.places__scent, .langs em { font-size: .88rem; opacity: .8; font-style: italic; text-align: right; }
+.world__note { margin: 1.4rem 0 0; opacity: .9; font-size: .98rem; }
+
+.map-wrap { max-width: 620px; width: 100%; margin-inline: auto; }
+.map {
+  width: 100%; height: auto; display: block; overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 14%, #000 86%, transparent), linear-gradient(to bottom, transparent, #000 10%, #000 90%, transparent);
+  -webkit-mask-composite: source-in;
+          mask-image: linear-gradient(to right, transparent, #000 14%, #000 86%, transparent), linear-gradient(to bottom, transparent, #000 10%, #000 90%, transparent);
+          mask-composite: intersect;
+}
+.map__land { fill: rgba(248, 241, 228, .17); stroke: rgba(248, 241, 228, .5); stroke-width: 1; stroke-linejoin: round; }
+.map__sea { fill: rgba(22, 70, 56, .9); stroke: rgba(248, 241, 228, .5); stroke-width: 1; stroke-linejoin: round; }
+.map__route { fill: none; stroke: var(--gold); stroke-width: 2.4; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; }
+.map-wrap.is-visible .map__route { stroke-dashoffset: 0; transition: stroke-dashoffset 5s ease-in-out .5s; }
+.map__pin { opacity: 0; transition: opacity .9s ease calc(var(--i) * .8s + .4s); }
+.map-wrap.is-visible .map__pin { opacity: 1; }
+.map__dot { fill: var(--gold); }
+.map__pulse { fill: none; stroke: var(--gold); stroke-width: 2; transform-box: fill-box; transform-origin: center; animation: pulse 2.6s ease-out infinite; animation-delay: calc(var(--i) * .5s); }
+@keyframes pulse { 0% { transform: scale(1); opacity: .9; } 100% { transform: scale(3.4); opacity: 0; } }
+.map text {
+  font-family: var(--serif); font-style: italic; font-size: 32px; fill: var(--cream);
+  paint-order: stroke; stroke: rgba(14, 50, 38, .95); stroke-width: 6px; stroke-linejoin: round;
+}
+
+/* ============ WHY PERFUMERY / WHY ME ============ */
+.why { display: grid; gap: clamp(1.5rem, 4vw, 3rem); grid-template-columns: 1fr 1fr; margin-top: 2rem; }
+@media (max-width: 860px) { .why { grid-template-columns: 1fr; } }
+.why__col { background: var(--cream); padding: clamp(1.6rem, 3vw, 2.6rem); border-top: 3px solid var(--green); box-shadow: 0 18px 40px rgba(18, 32, 15, .08); }
+.why__col--me { border-top-color: var(--terra); }
+.why__col h3 { font-size: 2rem; color: var(--green); margin-bottom: 1rem; font-style: italic; }
+.why__col--me h3 { color: var(--terra-deep); }
+.why__col > p { margin: 0 0 1.4rem; font-size: 1.05rem; }
+.why__list li { padding: .8rem 0 .8rem 1.4rem; border-top: 1px solid rgba(18, 32, 15, .12); position: relative; font-size: .98rem; }
+.why__list li::before { content: ""; position: absolute; left: 0; top: 1.35rem; width: 7px; height: 7px; border-radius: 50%; background: var(--green-bright); }
+.why__col--me .why__list li::before { background: var(--terra); }
+.why__list strong { font-family: var(--serif); font-weight: 600; font-size: 1.15rem; color: var(--ink); }
+
+/* ============ CREATION ============ */
+.creation__head { max-width: 720px; margin-bottom: 4rem; }
+.creation__name { font-size: clamp(2.2rem, 6vw, 4rem); color: var(--gold-soft); font-style: italic; }
+.creation__tag { font-family: var(--serif); font-size: 1.5rem; margin: 1rem 0; }
+.creation__text { opacity: .94; font-size: 1.05rem; }
+
+.creation__body { display: grid; grid-template-columns: 1.2fr .8fr; gap: clamp(2.5rem, 6vw, 5rem); align-items: center; margin-bottom: 5.5rem; }
+.creation__body .arch { --w: 320px; justify-self: center; }
+@media (max-width: 900px) {
+  .creation__body { grid-template-columns: 1fr; }
+  .creation__body .arch { order: -1; --w: 240px; margin-bottom: 2.5rem; }
+}
+.pyramid__row {
+  display: grid; grid-template-columns: 150px 1fr; gap: 1.2rem; align-items: center;
+  padding: 1.5rem 1.6rem; margin-bottom: .6rem; border-left: 3px solid var(--gold-soft);
+}
+.pyramid__row--top { background: rgba(248, 241, 228, .09); }
+.pyramid__row--heart { background: rgba(248, 241, 228, .15); }
+.pyramid__row--base { background: rgba(248, 241, 228, .21); }
+.pyramid__label { font-family: var(--serif); font-size: 1.45rem; display: block; line-height: 1.15; }
+.pyramid__label small { display: block; font-family: var(--sans); font-size: .7rem; letter-spacing: .15em; text-transform: uppercase; opacity: .8; margin-top: .3rem; }
+.notes { display: flex; flex-wrap: wrap; gap: .5rem; }
+.notes li { font-size: .88rem; padding: .3rem .9rem; border: 1px solid rgba(244, 220, 156, .75); border-radius: 999px; color: var(--gold-soft); }
+@media (max-width: 640px) { .pyramid__row { grid-template-columns: 1fr; gap: .8rem; } }
+
+.board__title { font-size: 2rem; margin-bottom: 1.5rem; font-style: italic; color: var(--gold-soft); }
+.board { display: grid; gap: 1rem; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 220px; }
+.tile { position: relative; margin: 0; overflow: hidden; border-radius: 3px; background: linear-gradient(135deg, var(--teal-deep), var(--rose)); }
+.tile:nth-child(2n) { background: linear-gradient(135deg, var(--gold), var(--terra)); }
+.tile:nth-child(3n) { background: linear-gradient(135deg, var(--green-bright), var(--teal)); }
+.tile--tall { grid-row: span 2; }
+.tile--wide { grid-column: span 2; }
+.tile img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease), opacity .6s; }
+.tile:hover img { transform: scale(1.06); }
+.tile figcaption {
+  position: absolute; inset: auto 0 0 0; padding: 1.6rem 1rem .8rem; font-size: .8rem; letter-spacing: .12em; text-transform: uppercase;
+  background: linear-gradient(transparent, rgba(14, 30, 20, .7)); color: var(--cream);
+}
+@media (max-width: 700px) { .board { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 170px; } .tile--wide { grid-column: span 2; } }
+
+/* ============ FAVOURITES ============ */
+.favs { display: grid; gap: 1.5rem; grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 900px) { .favs { grid-template-columns: 1fr; } }
+.fav { background: var(--cream); padding: 2.2rem 2rem; position: relative; border-bottom: 3px solid var(--terra); box-shadow: 0 18px 40px rgba(18, 32, 15, .08); }
+.fav:nth-child(2) { border-bottom-color: var(--teal-deep); }
+.fav:nth-child(3) { border-bottom-color: var(--gold); }
+.fav__rank { position: absolute; top: 1rem; right: 1.4rem; font-family: var(--serif); font-size: 3.4rem; color: var(--blush); line-height: 1; }
+.fav h3 { font-size: 1.9rem; color: var(--green); margin-bottom: .4rem; max-width: 80%; }
+.fav__house { font-size: .75rem; letter-spacing: .15em; text-transform: uppercase; opacity: .65; margin: 0 0 1rem; }
+.fav__notes { font-family: var(--serif); font-style: italic; font-size: 1.15rem; color: var(--terra-deep); margin: 0 0 1rem; }
+.fav__why { margin: 0; font-size: .95rem; }
+
+/* ============ CLOSING ============ */
+.closing .chapter__intro { max-width: 640px; }
+.contact { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1rem; }
+.btn {
+  display: inline-block; text-decoration: none; padding: .9rem 2.2rem; font-size: .8rem; letter-spacing: .22em; text-transform: uppercase;
+  background: var(--gold); color: var(--ink); transition: background .25s, transform .25s var(--ease);
+}
+.btn:hover { background: var(--cream); transform: translateY(-2px); }
+.closing .btn { background: var(--cream); box-shadow: 0 10px 24px rgba(18, 32, 15, .18); }
+.closing .btn:hover { background: var(--green); color: var(--cream); }
+.btn--ghost, .closing .btn--ghost { background: transparent; color: var(--ink); border: 1px solid var(--ink); box-shadow: none; }
+.btn--ghost:hover, .closing .btn--ghost:hover { background: var(--ink); color: var(--cream); }
+
+.footer { background: #0f2418; color: var(--sand); text-align: center; padding: 2rem 1rem; font-size: .8rem; letter-spacing: .1em; }
+.footer p { margin: 0; }
+
+/* ============ BLOOMS: your own flower photos, popping in from the corners ============
+   Only used in the top section, "Where it began" and "Why perfumery".
+   --size = how big, --rot = tilt, --off = how far it sits outside the edge (0.5 = half hidden) */
+.bloom {
+  --size: clamp(140px, 20vw, 280px);
+  position: absolute; z-index: 1; width: var(--size); aspect-ratio: 1; pointer-events: none;
+  opacity: 0; transform: var(--from) rotate(calc(var(--rot, 0deg) - 35deg)) scale(.35);
+  transition: opacity 1.4s var(--ease), transform 1.8s var(--ease);
+}
+.bloom--tl { top: calc(var(--size) * var(--off, .26) * -1); left: calc(var(--size) * var(--off, .26) * -1); transform-origin: 30% 30%; --from: translate(-18%, -18%); }
+.bloom--tr { top: calc(var(--size) * var(--off, .26) * -1); right: calc(var(--size) * var(--off, .26) * -1); transform-origin: 70% 30%; --from: translate(18%, -18%); }
+.bloom--bl { bottom: calc(var(--size) * var(--off, .26) * -1); left: calc(var(--size) * var(--off, .26) * -1); transform-origin: 30% 70%; --from: translate(-18%, 18%); }
+.bloom--br { bottom: calc(var(--size) * var(--off, .26) * -1); right: calc(var(--size) * var(--off, .26) * -1); transform-origin: 70% 70%; --from: translate(18%, 18%); }
+.bloom--ml { top: var(--top, 38%); left: calc(var(--size) * var(--off, .5) * -1); transform-origin: 30% 50%; --from: translate(-22%, 0); }
+.bloom--mr { top: var(--top, 38%); right: calc(var(--size) * var(--off, .5) * -1); transform-origin: 70% 50%; --from: translate(22%, 0); }
+.bloom.is-visible { opacity: 1; transform: rotate(var(--rot, 0deg)) scale(1); }
+
+.bloom img {
+  width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .8s;
+  animation: sway 10s ease-in-out infinite alternate;
+  /* soft faded edge so an ordinary rectangular photo melts into the background */
+  -webkit-mask-image: radial-gradient(circle at center, #000 48%, transparent 70%);
+          mask-image: radial-gradient(circle at center, #000 48%, transparent 70%);
+}
+.bloom img.is-loaded { opacity: 1; }
+/* for a PNG with a transparent background (a flower cut-out), add "bloom--cutout" to the bloom's class */
+.bloom--cutout img { -webkit-mask-image: none; mask-image: none; object-fit: contain; filter: drop-shadow(0 14px 18px rgba(0, 0, 0, .3)); }
+@keyframes sway { from { transform: rotate(-3deg) translateY(0); } to { transform: rotate(3deg) translateY(-8px); } }
+
+/* ============ PHOTO FADE-IN (portrait, perfume photo, vision board) ============ */
+img[data-photo]:not([data-bloom]) { opacity: 0; transition: opacity .8s; }
+img[data-photo].is-loaded { opacity: 1; }
+
+/* ============ REVEAL ANIMATION ============ */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 1s var(--ease), transform 1s var(--ease); }
+.reveal.is-visible { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .hero__glow, .bloom img, .map__pulse { animation: none; }
+  .bloom { opacity: 1; transform: rotate(var(--rot, 0deg)); transition: none; }
+  .map__route { stroke-dashoffset: 0; }
+  .map__pin { opacity: 1; }
+}
+  </style>
 </head>
 <body>
 
   <!-- NAV -->
   <nav class="nav" id="nav">
-    <a href="#top" class="nav__logo">Y.N.</a>
+    <a href="#top" class="nav__logo">M.R.</a>
     <ul class="nav__links">
       <li><a href="#story">Story</a></li>
       <li><a href="#world">World</a></li>
-      <li><a href="#passion">Passion</a></li>
+      <li><a href="#passion">Why me</a></li>
       <li><a href="#creation">Creation</a></li>
       <li><a href="#favourites">Favourites</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
 
-  <!-- HERO: the curiosity gap -->
+  <!-- HERO: photo + the curiosity gap -->
   <header class="hero" id="top">
-    <div class="hero__inner">
-      <p class="hero__eyebrow reveal">An unfinished formula</p>
-      <h1 class="hero__title reveal">
-        Five countries.<br>
-        Four languages.<br>
-        <em>One scent I can't stop chasing.</em>
-      </h1>
-      <p class="hero__sub reveal">
-        Every place I've lived left something behind in my memory. Not a photograph, not a word, a smell.
-        This is the story of how those scents made me want to become a perfumer.
-      </p>
-      <a href="#story" class="hero__cta reveal">Begin the story <span aria-hidden="true">↓</span></a>
+
+    <!-- ✏️ FLOWER PHOTOS: each one shows a photo you add yourself.
+         data-photo="orchid" means the file is called orchid.jpg / orchid.png (see the list at the bottom of this file).
+         To use a different picture, just change the word, e.g. data-photo="rose" and add rose.jpg. -->
+    <div class="bloom bloom--bl" style="--size:clamp(140px,19vw,270px);--rot:10deg;--off:.55"><img data-photo="orchid" data-bloom alt=""></div>
+    <div class="bloom bloom--br" style="--size:clamp(130px,17vw,250px);--rot:-18deg;--off:.5"><img data-photo="berries" data-bloom alt=""></div>
+    <div class="bloom bloom--mr" style="--size:clamp(110px,15vw,220px);--rot:14deg;--top:8%;--off:.55"><img data-photo="oud" data-bloom alt=""></div>
+
+    <div class="hero__grid">
+      <div class="hero__inner">
+        <p class="hero__eyebrow reveal">My journey to perfumery</p>
+        <h1 class="hero__title reveal">
+          Five countries.<br>
+          Four languages.<br>
+          <em>One scent I can't stop chasing.</em>
+        </h1>
+        <p class="hero__sub reveal">
+          Every place I've lived left something behind in my memory. Not a photograph, not a word, a smell.
+          This is the story of how those scents made me want to become a perfumer.
+        </p>
+        <a href="#story" class="hero__cta reveal">Begin the story <span aria-hidden="true">↓</span></a>
+      </div>
+
+      <!-- ✏️ YOUR PORTRAIT: add a photo called portrait.jpg -->
+      <figure class="arch portrait reveal" data-photo-wrap>
+        <div class="arch__frame" data-hint="Your photo&#10;portrait.jpg">
+          <img data-photo="portrait" alt="Portrait of me">
+        </div>
+        <figcaption class="arch__cap">Where my story starts</figcaption>
+      </figure>
     </div>
     <div class="hero__glow" aria-hidden="true"></div>
   </header>
@@ -47,11 +397,13 @@
 
     <!-- CHAPTER I -->
     <section class="chapter chapter--beige" id="story">
+      <div class="bloom bloom--tl" style="--size:clamp(150px,22vw,320px);--rot:25deg"><img data-photo="jasmine" data-bloom alt=""></div>
+      <div class="bloom bloom--br" style="--size:clamp(130px,19vw,280px);--rot:-12deg"><img data-photo="berries" data-bloom alt=""></div>
       <div class="wrap wrap--narrow">
         <p class="chapter__num reveal">Chapter I</p>
         <h2 class="chapter__title reveal">Where it began</h2>
         <div class="prose reveal">
-          <p class="lead">Hi, I'm <strong>your first name</strong>.</p>
+          <p class="lead">Hi, I'm <strong>Mia</strong>.</p>
           <!-- ✏️ EDIT: replace the paragraphs below with YOUR story. Keep it short and sensory. -->
           <p>
             Write here the first scent you remember. The kitchen, the street, the person it belonged to.
@@ -65,76 +417,99 @@
       </div>
     </section>
 
-    <!-- CHAPTER II: international profile -->
-    <section class="chapter chapter--brown" id="world">
+    <!-- CHAPTER II: the map -->
+    <section class="chapter chapter--dusk" id="world">
       <div class="wrap">
         <p class="chapter__num reveal">Chapter II</p>
         <h2 class="chapter__title reveal">A nose that travelled</h2>
-        <p class="chapter__intro reveal">
-          Moving taught me that every place has its own olfactory language, and that I had to learn it
-          the same way I learned to speak.
+        <p class="chapter__statement reveal">
+          The last seven years have been an immersion in, and an exploration of, different countries
+          and, with them, their scents.
         </p>
 
         <div class="world">
-          <div class="world__col reveal">
-            <h3>Five countries</h3>
-            <!-- ✏️ EDIT: your 5 countries + one scent for each -->
-            <ul class="places">
-              <li><span class="places__name">Country 1</span><span class="places__scent">the scent you associate with it</span></li>
-              <li><span class="places__name">Country 2</span><span class="places__scent">the scent you associate with it</span></li>
-              <li><span class="places__name">Country 3</span><span class="places__scent">the scent you associate with it</span></li>
-              <li><span class="places__name">Country 4</span><span class="places__scent">the scent you associate with it</span></li>
-              <li><span class="places__name">Country 5</span><span class="places__scent">the scent you associate with it</span></li>
-            </ul>
+          <div class="map-wrap reveal">
+<svg class="map" viewBox="0 0 1000 1024" role="img" aria-label="Map of Europe showing my journey: Macedonia, Italy, Dijon, Sweden, Belgium, then the Paris area">
+<path class="map__land" d="M44.7 954.6 L47.8 915.8 L33.3 905.9 L35.6 888.7 L46.7 865.6 L52.2 836.3 L47.8 808.1 L37.8 779.4 L60.0 759.5 L115.6 762.6 L160.0 767.2 L204.4 770.3 L216.7 731.7 L217.8 687.4 L195.6 647.0 L168.9 632.2 L146.7 628.9 L138.9 608.9 L166.7 595.5 L193.3 600.5 L208.9 598.8 L203.3 564.8 L217.8 576.8 L247.8 571.7 L277.8 547.6 L281.1 523.1 L315.6 507.1 L333.3 494.6 L345.6 467.5 L350.0 449.2 L366.7 432.5 L400.0 428.8 L433.3 425.0 L436.7 410.0 L437.8 375.6 L431.1 352.2 L426.7 332.5 L426.7 304.4 L435.6 288.1 L465.6 267.5 L480.0 261.3 L473.3 294.3 L486.7 316.5 L471.1 326.5 L457.8 344.4 L455.6 354.2 L454.4 379.4 L471.1 394.8 L484.4 410.0 L497.8 413.8 L513.3 402.4 L546.7 387.1 L560.0 413.8 L591.1 402.4 L658.9 394.8 L662.2 383.3 L680.0 392.9 L713.3 344.4 L711.1 312.5 L746.7 261.3 L780.0 292.2 L788.9 234.0 L766.7 210.5 L794.4 188.8 L866.7 186.6 L915.6 166.7 L883.3 135.3 L842.2 144.4 L798.9 157.8 L757.8 173.4 L738.9 144.4 L721.1 114.8 L724.4 19.8 L757.8 -17.5 L808.9 -76.7 L790.0 -116.7 L736.7 -108.7 L715.6 -61.1 L695.6 -15.0 L664.4 9.9 L628.9 53.8 L624.4 86.9 L626.7 133.1 L655.6 148.9 L666.7 193.1 L622.2 219.1 L614.4 261.3 L608.9 306.4 L591.1 326.5 L563.3 350.3 L536.7 358.1 L532.2 348.3 L526.7 330.5 L530.0 306.4 L510.0 263.4 L492.2 210.5 L483.3 169.0 L475.6 191.0 L457.8 210.5 L422.2 244.5 L401.1 250.8 L377.8 231.9 L371.1 208.3 L360.0 191.0 L358.9 146.6 L354.4 119.4 L357.8 72.8 L380.0 49.0 L415.6 19.8 L440.0 -15.0 L488.9 -61.1 L515.6 -103.3 L533.3 -157.9 L564.4 -203.2 L600.0 -268.1 L666.7 -348.9 L811.1 -441.7 L933.3 -387.9 L1577.8 -434.9 L1577.8 870.0 L1048.9 963.5 L1013.3 960.7 L955.6 969.0 L926.7 959.3 L891.1 966.3 L873.3 959.3 L853.3 955.2 L848.9 930.0 L840.0 915.8 L842.2 884.4 L826.7 870.0 L830.0 853.9 L820.0 845.1 L786.7 843.7 L771.1 864.2 L748.9 855.4 L753.3 878.6 L760.0 893.0 L771.1 915.8 L777.8 937.0 L757.8 930.0 L751.1 939.8 L756.7 963.5 L760.0 970.4 L745.6 962.1 L743.3 971.8 L731.1 960.7 L726.7 960.7 L718.9 937.0 L727.8 921.5 L720.0 917.3 L705.6 900.2 L694.4 884.4 L688.9 872.9 L676.7 856.9 L676.7 831.9 L671.1 814.1 L655.6 799.1 L645.6 791.5 L633.3 780.9 L610.0 765.7 L582.2 747.2 L568.9 716.0 L564.4 709.7 L552.2 723.8 L550.0 698.6 L520.0 706.5 L522.2 720.7 L544.4 762.6 L560.0 797.6 L604.4 814.1 L618.9 837.8 L643.3 851.0 L655.6 867.1 L652.2 875.8 L626.7 856.9 L625.6 895.9 L601.1 928.6 L592.2 924.3 L600.0 898.8 L600.0 888.7 L593.3 871.4 L573.3 851.0 L561.1 845.1 L545.6 834.8 L524.4 827.4 L516.7 820.0 L506.7 808.1 L491.1 799.1 L477.8 782.4 L473.3 764.1 L463.3 747.2 L442.2 737.9 L433.3 741.0 L422.2 753.4 L405.6 759.5 L398.9 764.1 L376.7 777.9 L363.3 771.8 L346.7 768.7 L326.7 768.7 L312.2 790.0 L317.8 802.1 L293.3 828.9 L272.2 837.8 L262.2 849.6 L237.8 885.9 L248.9 907.3 L233.3 918.7 L223.3 938.4 L195.6 963.5 L146.7 963.5 L125.6 980.1 L120.0 982.8 L104.4 969.0 L91.1 949.6 L68.9 955.2 Z M-22.2 1267.3 L-22.2 1141.9 L26.7 1131.6 L38.9 1082.2 L75.6 1047.8 L93.3 1037.1 L111.1 1010.1 L113.3 988.3 L126.7 985.6 L157.8 1003.3 L178.9 1002.0 L202.2 1007.4 L230.0 989.7 L246.7 977.3 L273.3 969.0 L300.0 966.3 L312.2 960.7 L357.8 962.1 L388.9 953.8 L416.7 958.0 L446.7 952.4 L463.3 946.8 L488.9 952.4 L480.0 971.8 L481.1 988.3 L484.4 1018.2 L468.9 1039.8 L500.0 1058.4 L537.8 1066.4 L555.6 1076.9 L555.6 1267.3 Z M117.8 552.8 L128.9 556.2 L164.4 547.6 L190.0 535.4 L241.1 526.6 L275.6 514.2 L276.7 505.4 L260.0 501.8 L273.3 487.5 L283.3 458.4 L252.2 449.2 L246.7 425.0 L242.2 406.2 L213.3 371.7 L200.0 341.6 L188.9 328.5 L197.8 286.1 L204.4 271.7 L166.7 263.4 L155.6 267.5 L175.6 223.3 L133.3 225.5 L115.6 271.7 L117.8 308.4 L106.7 304.4 L115.6 360.0 L140.0 356.1 L131.1 375.6 L136.7 385.2 L166.7 375.6 L166.7 394.8 L177.8 432.5 L144.4 436.2 L140.0 454.7 L153.3 465.7 L137.8 480.2 L126.7 487.5 L155.6 498.2 L173.3 503.6 L184.4 501.8 L166.7 512.5 L151.1 512.5 L140.0 519.6 L133.3 540.6 Z M104.4 476.6 L108.9 436.2 L111.1 410.0 L113.3 387.1 L106.7 363.9 L82.2 363.9 L80.0 356.1 L57.8 391.0 L53.3 398.6 L22.2 402.4 L44.4 439.9 L24.4 463.9 L13.3 480.2 L22.2 494.6 L33.3 505.4 L55.6 498.2 L88.9 480.2 Z M521.1 932.8 L520.0 924.3 L541.1 922.9 L582.2 918.7 L592.2 920.1 L580.0 941.2 L584.4 953.8 L580.0 963.5 L561.1 953.8 L535.6 941.2 Z M431.1 845.1 L455.6 843.7 L460.0 867.1 L458.9 893.0 L446.7 893.0 L431.1 897.3 L433.3 872.9 L433.3 861.2 Z M452.2 780.9 L454.4 790.0 L456.7 814.1 L447.8 828.9 L435.6 814.1 L438.9 794.5 Z M296.7 883.0 L313.3 871.4 L321.1 878.6 L313.3 890.2 L304.4 888.7 Z M766.7 1002.0 L780.0 995.1 L802.2 1000.6 L828.9 1002.0 L824.4 1010.1 L793.3 1011.5 L768.9 1004.7 Z M491.1 344.4 L497.8 328.5 L515.6 330.5 L524.4 344.4 L517.8 363.9 L504.4 367.8 L493.3 360.0 Z M462.2 352.2 L471.1 346.3 L484.4 350.3 L480.0 367.8 L466.7 371.7 Z M646.7 288.1 L660.0 255.0 L671.1 255.0 L662.2 292.2 Z"/>
+<path class="map__sea" d="M888.9 834.8 L911.1 836.3 L944.4 836.3 L977.8 811.1 L1024.4 811.1 L1051.1 831.9 L1126.7 840.7 L1168.9 823.0 L1171.1 806.6 L1126.7 762.6 L1084.4 728.5 L1057.8 709.7 L1022.2 719.1 L988.9 731.7 L966.7 708.1 L993.3 684.2 L955.6 674.6 L926.7 671.4 L904.4 712.8 L881.1 744.1 L864.4 774.8 L855.6 796.1 Z"/>
+<path class="map__sea" d="M826.7 867.1 L855.6 842.2 L888.9 840.7 L908.9 848.1 L888.9 858.3 L866.7 859.8 L844.4 858.3 Z"/>
+<path class="map__route" pathLength="1" d="M726.7 823.0 Q632.8 762.0 524.4 790.0 Q472.4 680.4 356.4 644.7 Q548.1 446.2 588.9 173.4 Q395.7 305.1 346.7 533.6 Q297.7 543.5 296.7 593.4"/>
+<g class="map__pin" style="--i:0"><circle class="map__pulse" cx="726.7" cy="823.0" r="9"/><circle class="map__dot" cx="726.7" cy="823.0" r="6"/><text x="740.7" y="827.0" text-anchor="start">Macedonia</text></g>
+<g class="map__pin" style="--i:1"><circle class="map__pulse" cx="524.4" cy="790.0" r="9"/><circle class="map__dot" cx="524.4" cy="790.0" r="6"/><text x="538.4" y="794.0" text-anchor="start">Italy</text></g>
+<g class="map__pin" style="--i:2"><circle class="map__pulse" cx="356.4" cy="644.7" r="9"/><circle class="map__dot" cx="356.4" cy="644.7" r="6"/><text x="342.4" y="670.7" text-anchor="end">Dijon</text></g>
+<g class="map__pin" style="--i:3"><circle class="map__pulse" cx="588.9" cy="173.4" r="9"/><circle class="map__dot" cx="588.9" cy="173.4" r="6"/><text x="602.9" y="177.4" text-anchor="start">Sweden</text></g>
+<g class="map__pin" style="--i:4"><circle class="map__pulse" cx="346.7" cy="533.6" r="9"/><circle class="map__dot" cx="346.7" cy="533.6" r="6"/><text x="360.7" y="537.6" text-anchor="start">Belgium</text></g>
+<g class="map__pin" style="--i:5"><circle class="map__pulse" cx="296.7" cy="593.4" r="9"/><circle class="map__dot" cx="296.7" cy="593.4" r="6"/><text x="282.7" y="597.4" text-anchor="end">Paris</text></g>
+</svg>
           </div>
-          <div class="world__col reveal">
-            <h3>Four languages</h3>
-            <!-- ✏️ EDIT: your 4 languages + level -->
-            <ul class="langs">
-              <li><span>Language 1</span><em>native</em></li>
-              <li><span>Language 2</span><em>level</em></li>
-              <li><span>Language 3</span><em>level</em></li>
-              <li><span>Language 4</span><em>level</em></li>
-            </ul>
-            <p class="world__note">
-              Speaking several languages trained me to notice nuance, and perfumery is a language made entirely of it.
-              It also means I can read about the craft, and talk to people in it, in more than one tongue.
-            </p>
+
+          <div class="world__col">
+            <div class="reveal">
+              <h3>Five countries</h3>
+              <!-- ✏️ EDIT: one scent for each country -->
+              <ul class="places">
+                <li><span class="places__name">Macedonia</span><span class="places__scent">the scent you associate with it</span></li>
+                <li><span class="places__name">Italy</span><span class="places__scent">the scent you associate with it</span></li>
+                <li><span class="places__name">France<small>Dijon, then near Paris</small></span><span class="places__scent">the scent you associate with it</span></li>
+                <li><span class="places__name">Sweden</span><span class="places__scent">the scent you associate with it</span></li>
+                <li><span class="places__name">Belgium</span><span class="places__scent">the scent you associate with it</span></li>
+              </ul>
+            </div>
+
+            <div class="reveal">
+              <h3>Four languages</h3>
+              <ul class="langs">
+                <li><span>Macedonian</span><em>native</em></li>
+                <li><span>English</span><em>bilingual</em></li>
+                <li><span>French</span><em>professional proficiency</em></li>
+                <li><span>Italian</span><em>professional proficiency</em></li>
+              </ul>
+              <p class="world__note">
+                Speaking several languages trained me to notice nuance, and perfumery is a language made entirely of it.
+              </p>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- CHAPTER III: passion -->
+    <!-- CHAPTER III: why perfumery, why me -->
     <section class="chapter chapter--beige" id="passion">
-      <div class="wrap wrap--narrow">
+      <div class="bloom bloom--tr" style="--size:clamp(150px,23vw,330px);--rot:-10deg"><img data-photo="orchid" data-bloom alt=""></div>
+      <div class="bloom bloom--bl" style="--size:clamp(140px,20vw,290px);--rot:0deg"><img data-photo="musk" data-bloom alt=""></div>
+      <div class="wrap">
         <p class="chapter__num reveal">Chapter III</p>
-        <h2 class="chapter__title reveal">Why perfumery</h2>
-        <div class="prose reveal">
-          <!-- ✏️ EDIT: your real reasons -->
-          <p>
-            Explain what draws you to the craft: the chemistry, the artistry, the emotion, the way a fragrance
-            can hold a memory. Be specific: a book you read, a perfumery you visited, a raw material you smelled
-            and couldn't forget.
-          </p>
-        </div>
+        <h2 class="chapter__title reveal">Why perfumery, and why me</h2>
 
-        <div class="pillars">
-          <article class="pillar reveal">
-            <span class="pillar__icon" aria-hidden="true">01</span>
-            <h3>The science</h3>
-            <p>What fascinates you about molecules, extraction, stability, formulation.</p>
-          </article>
-          <article class="pillar reveal">
-            <span class="pillar__icon" aria-hidden="true">02</span>
-            <h3>The art</h3>
-            <p>How you think about composition, balance, tension and harmony in a fragrance.</p>
-          </article>
-          <article class="pillar reveal">
-            <span class="pillar__icon" aria-hidden="true">03</span>
-            <h3>The story</h3>
-            <p>Why scent is the most powerful storytelling medium you know.</p>
-          </article>
+        <div class="why">
+          <div class="why__col reveal">
+            <h3>Why perfumery</h3>
+            <!-- ✏️ EDIT: your real reasons -->
+            <p>
+              Explain what draws you to the craft: the chemistry, the artistry, the emotion, the way a fragrance
+              can hold a memory. Be specific: a book you read, a perfumery you visited, a raw material you smelled
+              and couldn't forget.
+            </p>
+            <ul class="why__list">
+              <li><strong>The science.</strong> What fascinates you about molecules, extraction, stability, formulation.</li>
+              <li><strong>The art.</strong> How you think about composition, balance, tension and harmony.</li>
+              <li><strong>The story.</strong> Why scent is the most powerful storytelling medium you know.</li>
+            </ul>
+          </div>
+
+          <div class="why__col why__col--me reveal">
+            <h3>Why me</h3>
+            <!-- ✏️ EDIT: what you would bring to a traineeship -->
+            <p>
+              Say in your own words why you are the right person to train: your studies, your discipline,
+              your sensitivity, and what you would bring to the team from day one.
+            </p>
+            <ul class="why__list">
+              <li><strong>Used to new places.</strong> Living in five countries taught me to adapt quickly, listen first and learn how things are done.</li>
+              <li><strong>A multilingual ear.</strong> French and Italian are among perfumery's historic languages, and I work in both.</li>
+              <li><strong>Your own strength.</strong> Add what you uniquely bring.</li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
@@ -158,49 +533,58 @@
             </p>
           </div>
 
-          <!-- Scent pyramid -->
-          <div class="pyramid reveal">
-            <div class="pyramid__row pyramid__row--top">
-              <span class="pyramid__label">Top notes<small>first impression</small></span>
-              <ul class="notes"><li>Note one</li><li>Note two</li><li>Note three</li></ul>
+          <!-- notes on the left, a photo on the right -->
+          <div class="creation__body">
+            <div class="pyramid reveal">
+              <div class="pyramid__row pyramid__row--top">
+                <span class="pyramid__label">Top notes<small>first impression</small></span>
+                <ul class="notes"><li>Note one</li><li>Note two</li><li>Note three</li></ul>
+              </div>
+              <div class="pyramid__row pyramid__row--heart">
+                <span class="pyramid__label">Heart notes<small>the character</small></span>
+                <ul class="notes"><li>Note one</li><li>Note two</li><li>Note three</li></ul>
+              </div>
+              <div class="pyramid__row pyramid__row--base">
+                <span class="pyramid__label">Base notes<small>the memory it leaves</small></span>
+                <ul class="notes"><li>Note one</li><li>Note two</li><li>Note three</li></ul>
+              </div>
             </div>
-            <div class="pyramid__row pyramid__row--heart">
-              <span class="pyramid__label">Heart notes<small>the character</small></span>
-              <ul class="notes"><li>Note one</li><li>Note two</li><li>Note three</li></ul>
-            </div>
-            <div class="pyramid__row pyramid__row--base">
-              <span class="pyramid__label">Base notes<small>the memory it leaves</small></span>
-              <ul class="notes"><li>Note one</li><li>Note two</li><li>Note three</li></ul>
-            </div>
+
+            <!-- ✏️ PERFUME PHOTO: add a photo called perfume.jpg -->
+            <figure class="arch reveal" data-photo-wrap>
+              <div class="arch__frame" data-hint="Your photo&#10;perfume.jpg">
+                <img data-photo="perfume" alt="The mood of my perfume">
+              </div>
+              <figcaption class="arch__cap">The mood of the scent</figcaption>
+            </figure>
           </div>
 
           <!-- Vision board -->
           <h3 class="board__title reveal">The vision board</h3>
           <div class="board">
-            <!-- ✏️ EDIT: drop your pictures in /images and change the file names below.
-                 Missing images simply show as a coloured tile. -->
-            <figure class="tile tile--tall reveal">
-              <img src="images/vision-1.jpg" alt="Vision board image 1" loading="lazy">
+            <!-- ✏️ EDIT: add photos called vision-1.jpg … vision-6.jpg. Missing ones show as a coloured tile. -->
+            <figure class="tile tile--tall reveal" data-photo-wrap>
+              <img data-photo="vision-1" alt="Vision board image 1" loading="lazy">
               <figcaption>Caption 1</figcaption>
             </figure>
-            <figure class="tile reveal">
-              <img src="images/vision-2.jpg" alt="Vision board image 2" loading="lazy">
+            <figure class="tile reveal" data-photo-wrap>
+              <img data-photo="vision-2" alt="Vision board image 2" loading="lazy">
               <figcaption>Caption 2</figcaption>
             </figure>
-            <figure class="tile reveal">
-              <img src="images/vision-3.jpg" alt="Vision board image 3" loading="lazy">
+            <figure class="tile reveal" data-photo-wrap>
+              <img data-photo="vision-3" alt="Vision board image 3" loading="lazy">
               <figcaption>Caption 3</figcaption>
             </figure>
-            <figure class="tile tile--wide reveal">
-              <img src="images/vision-4.jpg" alt="Vision board image 4" loading="lazy">
+            <figure class="tile tile--wide reveal" data-photo-wrap>
+              <img data-photo="vision-4" alt="Vision board image 4" loading="lazy">
               <figcaption>Caption 4</figcaption>
             </figure>
-            <figure class="tile tile--tall reveal">
-              <img src="images/vision-5.jpg" alt="Vision board image 5" loading="lazy">
+            <figure class="tile tile--tall reveal" data-photo-wrap>
+              <img data-photo="vision-5" alt="Vision board image 5" loading="lazy">
               <figcaption>Caption 5</figcaption>
             </figure>
-            <figure class="tile reveal">
-              <img src="images/vision-6.jpg" alt="Vision board image 6" loading="lazy">
+            <figure class="tile reveal" data-photo-wrap>
+              <img data-photo="vision-6" alt="Vision board image 6" loading="lazy">
               <figcaption>Caption 6</figcaption>
             </figure>
           </div>
@@ -221,7 +605,7 @@
           <!-- ✏️ EDIT: your real top 3 -->
           <article class="fav reveal">
             <span class="fav__rank">I</span>
-            <h3>Perfume name</h3>
+            <h3>Key to her</h3>
             <p class="fav__house">House · Perfumer · Year</p>
             <p class="fav__notes">Key notes · key notes · key notes</p>
             <p class="fav__why">Why it matters to you, in one or two honest sentences.</p>
@@ -244,18 +628,21 @@
       </div>
     </section>
 
-    <!-- CLOSING -->
-    <section class="chapter chapter--brown closing" id="contact">
+    <!-- EPILOGUE -->
+    <section class="chapter chapter--sunset closing" id="contact">
       <div class="wrap wrap--narrow center">
         <p class="chapter__num reveal">Epilogue</p>
-        <h2 class="chapter__title reveal">The next chapter is yours to write with me</h2>
+        <h2 class="chapter__title reveal">I'd love to dive into this world</h2>
         <p class="chapter__intro reveal">
-          I'm looking for a traineeship where I can learn the craft from the ground up, with curiosity,
-          discipline and a nose that has already travelled a long way.
+          I would love to bring my passion for perfumery into a place where I can dive into this world completely:
+          learn the craft from the ground up, train my nose every single day, and grow among people who live for scent.
+          Five countries and four languages taught me to listen, to adapt and to notice what others walk past.
+          Perfumery is where I want to put all of it to work.
         </p>
         <div class="contact reveal">
+          <!-- ✏️ EDIT: put your real email here (replace YOUR-EMAIL@example.com) -->
           <a class="btn" href="mailto:YOUR-EMAIL@example.com">Write to me</a>
-          <!-- ✏️ EDIT: add your LinkedIn, or delete this line -->
+          <!-- ✏️ EDIT: add your LinkedIn link, or delete this line -->
           <a class="btn btn--ghost" href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
         </div>
       </div>
@@ -264,9 +651,91 @@
   </main>
 
   <footer class="footer">
-    <p>© <span id="year"></span> Your Name · Made with a lot of sniffing</p>
+    <p>© <span id="year"></span> Mia Ristevska · Made with a lot of sniffing</p>
   </footer>
 
-  <script src="js/main.js"></script>
+  <!--
+    ==================== YOUR PHOTO FILES ====================
+    Put these next to index.html, OR inside a folder called "images" (both work).
+    Use lowercase names. .jpg, .jpeg, .png and .webp all work.
+
+      portrait   → your photo at the top
+      perfume    → the photo next to your perfume notes
+      vision-1 … vision-6 → the vision board
+      orchid, jasmine, berries, oud, musk → the flower photos in the corners
+                   (in the top section, "Where it began" and "Why perfumery")
+
+    A photo that is missing simply doesn't show, so you can add them one by one.
+  -->
+
+  <script>
+// ---------- 1. Photos ----------
+// <img data-photo="portrait"> looks for portrait.jpg / .jpeg / .png / .webp,
+// first in the images/ folder, then next to index.html. Nothing found = nothing shown.
+const EXT = ['jpg', 'jpeg', 'png', 'webp'];
+const BASES = ['images/', ''];
+const BLOOM_BASES = ['images/botanicals/', 'images/', ''];
+const found = new Map();
+
+function probe(url) {
+  return new Promise((resolve) => {
+    const t = new Image();
+    t.onload = () => resolve(url);
+    t.onerror = () => resolve(null);
+    t.src = url;
+  });
+}
+function findPhoto(name, bases) {
+  const key = bases.join('|') + name;
+  if (!found.has(key)) {
+    const urls = [];
+    bases.forEach((b) => EXT.forEach((e) => urls.push(`${b}${name}.${e}`)));
+    found.set(key, Promise.all(urls.map(probe)).then((r) => r.find(Boolean) || null));
+  }
+  return found.get(key);
+}
+
+document.querySelectorAll('img[data-photo]').forEach(async (img) => {
+  const wrap = img.closest('[data-photo-wrap]');
+  const url = await findPhoto(img.dataset.photo, img.hasAttribute('data-bloom') ? BLOOM_BASES : BASES);
+  if (!url) { wrap && wrap.classList.add('no-photo'); return; }
+  img.onload = () => { img.classList.add('is-loaded'); wrap && wrap.classList.add('has-photo'); };
+  img.src = url;
+});
+
+// ---------- 2. Scroll reveal (text and map) ----------
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) { entry.target.classList.add('is-visible'); io.unobserve(entry.target); }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -5% 0px' });
+
+document.querySelectorAll('.reveal').forEach((el, i) => {
+  if (el.closest('.hero')) el.style.transitionDelay = `${i * 0.15}s`;
+  io.observe(el);
+});
+
+// ---------- 3. Flowers open when their section scrolls into view ----------
+const bloomIo = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (!entry.isIntersecting) return;
+    entry.target.querySelectorAll(':scope > .bloom').forEach((b, i) => {
+      b.style.transitionDelay = `${0.3 + i * 0.35}s`;
+      b.classList.add('is-visible');
+    });
+    bloomIo.unobserve(entry.target);
+  });
+}, { threshold: 0.15 });
+document.querySelectorAll('.hero, .chapter').forEach((sec) => bloomIo.observe(sec));
+
+// ---------- 4. Nav turns solid after the top ----------
+const nav = document.getElementById('nav');
+const onScroll = () => nav.classList.toggle('is-solid', window.scrollY > 60);
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
+
+// ---------- 5. Footer year ----------
+document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
